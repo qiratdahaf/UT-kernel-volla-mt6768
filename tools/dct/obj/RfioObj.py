@@ -53,7 +53,7 @@ class RfioObj(ModuleObj):
                 if cmp(node.nodeName, 'count') == 0:
                     if len(node.childNodes) == 0:
                         break
-                    self.__count = string.atoi(node.childNodes[0].nodeValue)
+                    self.__count = int(node.childNodes[0].nodeValue)
                 if cmp(node.nodeName, 'mmode') == 0:
                     if len(node.childNodes) == 0:
                         break

@@ -92,7 +92,7 @@ class AdcObj(ModuleObj):
         return gen_str
 
     def fill_dtsiFile(self):
-        if len(ModuleObj.get_data(self).keys()) == 0:
+        if len(list(ModuleObj.get_data(self).keys())) == 0:
             return ''
         gen_str = '''&auxadc {\n'''
         gen_str += '''\tadc_channel@ {\n'''
@@ -102,7 +102,7 @@ class AdcObj(ModuleObj):
 
         # sort by the key, or the sequence is dissorted
         #sorted_list = sorted(ModuleObj.get_data(self).keys())
-        for key in sorted_key(ModuleObj.get_data(self).keys()):
+        for key in sorted_key(list(ModuleObj.get_data(self).keys())):
             value = ModuleObj.get_data(self)[key]
 
             if value == "TEMPERATURE":

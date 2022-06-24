@@ -3,11 +3,11 @@
 
 import sys, os
 import re
-import ConfigParser
+import configparser
 import string
 import xml.dom.minidom
 
-from ModuleObj import ModuleObj
+from .ModuleObj import ModuleObj
 from data.RfioData import RfioData
 
 from utility.util import log
@@ -28,7 +28,7 @@ class RfioObj(ModuleObj):
         self.__mapPadName = {}
 
     def get_cfgInfo(self):
-        cp = ConfigParser.ConfigParser(allow_no_value=True)
+        cp = configparser.ConfigParser(allow_no_value=True)
         path = os.path.join(sys.path[0], 'config', 'RFIO.cmp')
         if not os.path.exists(path) or not os.path.isfile(path):
             log(LogLevel.error, 'Can not find YuSu.cmp file!')
@@ -134,7 +134,7 @@ class RfioObj(ModuleObj):
         gen_str = '''#include "digrf_iomux.h"\n'''
 
         gen_str += '''const io_cfg_table_t digrf_io_cfg_table = {\n\t%s_CHIP_ID,\n\t%s,\n\t0,\n\t{\n''' %(self.__chipName, self.__mMode)
-        for key in sorted_key(self.__mapPadName.keys()):
+        for key in sorted_key(list(self.__mapPadName.keys())):
             padName = self.__mapPadName[key]
             item = ModuleObj.get_data(self)[padName.upper()]
             iesStr = 'RFIO_DISABLE'

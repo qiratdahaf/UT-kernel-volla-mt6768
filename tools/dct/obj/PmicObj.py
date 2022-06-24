@@ -39,10 +39,10 @@
 
 import sys, os
 import re
-import ConfigParser
+import configparser
 import xml.dom.minidom
 
-from ModuleObj import ModuleObj
+from .ModuleObj import ModuleObj
 from data.PmicData import PmicData
 
 from utility.util import log
@@ -64,7 +64,7 @@ class PmicObj(ModuleObj):
 
 
     def get_cfgInfo(self):
-        cp = ConfigParser.ConfigParser(allow_no_value=True)
+        cp = configparser.ConfigParser(allow_no_value=True)
         cp.read(ModuleObj.get_cmpPath())
 
         PmicData._var_list = cp.options('APPLICATION')
@@ -152,7 +152,7 @@ class PmicObj(ModuleObj):
     def fill_hFile(self):
         gen_str = ''
         used = []
-        for key in sorted_key(ModuleObj.get_data(self).keys()):
+        for key in sorted_key(list(ModuleObj.get_data(self).keys())):
             value = ModuleObj.get_data(self)[key]
             for name in value.get_nameList():
                 if name.strip() != '':
@@ -173,10 +173,10 @@ class PmicObj(ModuleObj):
 
     def fill_dtsiFile(self):
         gen_str = ''
-        if len(ModuleObj.get_data(self).keys()) == 0:
+        if len(list(ModuleObj.get_data(self).keys())) == 0:
             return ''
 
-        for key in sorted_key(ModuleObj.get_data(self).keys()):
+        for key in sorted_key(list(ModuleObj.get_data(self).keys())):
             value = ModuleObj.get_data(self)[key]
             gen_str += '''&mt_pmic_%s_ldo_reg {\n''' %(value.get_ldoName().lower())
             gen_str += '''\tregulator-name = \"%s\";\n''' %((value.get_ldoName().replace('_', '')).lower())
@@ -187,7 +187,7 @@ class PmicObj(ModuleObj):
         gen_str += '''\n'''
         gen_str += '''&kd_camera_hw1 {\n'''
 
-        for key in sorted_key(ModuleObj.get_data(self).keys()):
+        for key in sorted_key(list(ModuleObj.get_data(self).keys())):
             value = ModuleObj.get_data(self)[key]
             for varName in value.get_nameList():
             #for i in range(0, self.__appCount):
@@ -212,7 +212,7 @@ class PmicObj(ModuleObj):
         gen_str += '''};\n\n'''
         gen_str += '''&touch {\n'''
 
-        for key in sorted_key(ModuleObj.get_data(self).keys()):
+        for key in sorted_key(list(ModuleObj.get_data(self).keys())):
             value = ModuleObj.get_data(self)[key]
             for name in value.get_nameList():
                 if name.find('TOUCH') != -1:
@@ -233,7 +233,7 @@ class PmicObj(ModuleObj):
         gen_str += '''{\n'''
         idx = 0
 
-        for key in sorted_key(ModuleObj.get_data(self).keys()):
+        for key in sorted_key(list(ModuleObj.get_data(self).keys())):
             value = ModuleObj.get_data(self)[key]
             if value.get_defEnable() != 0:
                 gen_str += '''\t%s(%s,%d);\n''' %(self.__func, self.__paraList[idx], value.get_defEnable()-1)
@@ -257,10 +257,10 @@ class PmicObj_MT6758(PmicObj):
 
     def fill_dtsiFile(self):
         gen_str = ''
-        if len(ModuleObj.get_data(self).keys()) ==0:
+        if len(list(ModuleObj.get_data(self).keys())) ==0:
             return ''
 
-        for key in sorted_key(ModuleObj.get_data(self).keys()):
+        for key in sorted_key(list(ModuleObj.get_data(self).keys())):
             value = ModuleObj.get_data(self)[key]
             gen_str += '''&mt_pmic_%s_ldo_reg {\n''' %(value.get_ldoName().lower())
             gen_str += '''\tregulator-name = \"%s\";\n''' %((value.get_ldoName().replace('_', '')).lower())
@@ -271,7 +271,7 @@ class PmicObj_MT6758(PmicObj):
         gen_str += '''\n'''
         gen_str += '''&kd_camera_hw1 {\n'''
 
-        for key in sorted_key(ModuleObj.get_data(self).keys()):
+        for key in sorted_key(list(ModuleObj.get_data(self).keys())):
             value = ModuleObj.get_data(self)[key]
             for varName in value.get_nameList():
             #for i in range(0, self.__appCount):
@@ -301,7 +301,7 @@ class PmicObj_MT6758(PmicObj):
         gen_str += '''};\n\n'''
         gen_str += '''&touch {\n'''
 
-        for key in sorted_key(ModuleObj.get_data(self).keys()):
+        for key in sorted_key(list(ModuleObj.get_data(self).keys())):
             value = ModuleObj.get_data(self)[key]
             for name in value.get_nameList():
                 if name.find('TOUCH') != -1:

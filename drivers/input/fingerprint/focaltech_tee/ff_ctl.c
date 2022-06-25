@@ -344,7 +344,8 @@ static int ff_ctl_register_input(void)
         input_set_capability(g_context->input, EV_KEY, g_config->keycode_double_click);
         input_set_capability(g_context->input, EV_KEY, g_config->keycode_click       );
         input_set_capability(g_context->input, EV_KEY, g_config->keycode_long_press  );
-        input_set_capability(g_context->input, EV_KEY, g_config->keycode_simulation  );
+        // HALIUM: Disable simulation (F11) keycode as accidentally holding on the sensor causes window contents to shake
+        //input_set_capability(g_context->input, EV_KEY, g_config->keycode_simulation  );
         input_set_capability(g_context->input, EV_KEY, 558); // Added by xuanfeng.ye for task7065065 on 2018-10-25
     }
 

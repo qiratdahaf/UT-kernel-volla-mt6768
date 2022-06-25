@@ -28,7 +28,7 @@ class RfioObj(ModuleObj):
         self.__mapPadName = {}
 
     def get_cfgInfo(self):
-        cp = configparser.ConfigParser(allow_no_value=True)
+        cp = configparser.ConfigParser(allow_no_value=True, strict=False)
         path = os.path.join(sys.path[0], 'config', 'RFIO.cmp')
         if not os.path.exists(path) or not os.path.isfile(path):
             log(LogLevel.error, 'Can not find YuSu.cmp file!')

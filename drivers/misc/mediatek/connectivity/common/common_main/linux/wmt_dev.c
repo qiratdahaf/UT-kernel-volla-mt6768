@@ -544,7 +544,7 @@ static UINT32 wmt_dev_tra_poll(VOID)
 		(*mtk_wcn_wlan_bus_tx_cnt_clr)();
 	else
 		WMT_ERR_FUNC("WMT-DEV:error chip type(%d)\n", chip_type);
-	WMT_INFO_FUNC("**poll_during_time = %d > %d, during_count = %d > %d, query\n",
+	WMT_DBG_FUNC("**poll_during_time = %d > %d, during_count = %d > %d, query\n",
 		      jiffies_to_msecs(poll_during_time), TIME_THRESHOLD_TO_TEMP_QUERY,
 		      jiffies_to_msecs(during_count), COUNT_THRESHOLD_TO_TEMP_QUERY);
 
@@ -671,7 +671,7 @@ LONG wmt_dev_tm_temp_query(VOID)
 		osal_unlock_unsleepable_lock(&g_temp_query_spinlock);
 
 		if (index == -1) {
-			WMT_INFO_FUNC("[Thermal] current_temp = 0x%x\n", (current_temp & 0xFF));
+			WMT_DBG_FUNC("[Thermal] current_temp = 0x%x\n", (current_temp & 0xFF));
 		} else {
 			WMT_ERR_FUNC("Temperature(0x%x) update failed due to modified idx_temp_table(%d, %d)",
 				(current_temp & 0xFF), idx_temp_table, index);

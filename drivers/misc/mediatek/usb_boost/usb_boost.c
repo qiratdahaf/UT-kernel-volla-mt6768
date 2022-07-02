@@ -290,7 +290,7 @@ static void boost_work(struct work_struct *work_struct)
 	ptr_inst->is_running = true;
 	boost_inst[id].request_func = __request_empty;
 	ptr_inst->work_cnt++;
-	USB_BOOST_NOTICE("id:%d, begin of work\n", id);
+	USB_BOOST_DBG("id:%d, begin of work\n", id);
 
 	/* dump_info(id); */
 	__boost_act(id, ACT_HOLD);
@@ -320,7 +320,7 @@ static void boost_work(struct work_struct *work_struct)
 	__boost_act(id, ACT_RELEASE);
 	boost_inst[id].request_func = __request_it;
 	ptr_inst->is_running = false;
-	USB_BOOST_NOTICE("id:%d, end of work\n", id);
+	USB_BOOST_DBG("id:%d, end of work\n", id);
 	/* dump_info(id); */
 }
 

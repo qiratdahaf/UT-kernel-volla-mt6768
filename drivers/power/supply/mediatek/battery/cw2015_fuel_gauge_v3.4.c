@@ -60,7 +60,7 @@ extern struct hardware_info current_coulo_info;
 #define cw_printk(flg, fmt, arg...)        \
 	({                                    \
 		if(flg >= CWFG_ENABLE_LOG){\
-			printk("FG_CW2015 : %s : " fmt, __FUNCTION__ ,##arg);\
+			pr_debug("FG_CW2015 : %s : " fmt, __FUNCTION__ ,##arg);\
 		}else{}                           \
 	})     //need check by Chaman
 
@@ -555,7 +555,7 @@ static int cw_get_capacity(struct cw_battery *cw_bat)
 	/* case 1 : aviod swing */
 	remainder = (((real_SOC * 256 + digit_SOC) * 100) / 256) % 100;
 		
-	printk(KERN_ERR"real_SOC = %d, digit_SOC = %d, remainder = %d, cw_capacity = %d, cw_bat->capacity = %d\n", 
+	pr_debug("real_SOC = %d, digit_SOC = %d, remainder = %d, cw_capacity = %d, cw_bat->capacity = %d\n", 
 		real_SOC, digit_SOC, remainder, cw_capacity, cw_bat->capacity);
 		
 	if((remainder > 70 || remainder < 30) && (cw_capacity >= (cw_bat->capacity - 1)) && (cw_capacity <= (cw_bat->capacity + 1)) && (cw_capacity != 100))

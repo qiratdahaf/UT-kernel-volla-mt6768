@@ -1117,7 +1117,7 @@ out:
 				bc_dump_buf_append(bc_dump_buf, " %lld,",
 					td->evtdev->next_event);
 		}
-		printk_deferred("[name:bc&]%s\n", get_bc_dump_buf(bc_dump_buf));
+		pr_debug("[name:bc&]%s\n", get_bc_dump_buf(bc_dump_buf));
 	}
 #endif
 	return ret;

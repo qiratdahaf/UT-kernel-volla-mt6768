@@ -137,7 +137,7 @@ void mtk_idle_dump_cnt_in_interval(void)
 	mtk_idle_module_info_dump(MTK_IDLE_MODULE_INFO_COUNT
 				,  get_log(), IDLE_LOG_BUF_LEN);
 	/* dump log */
-	printk_deferred("[name:spm&]Power/swap %s\n", get_log());
+	pr_debug("[name:spm&]Power/swap %s\n", get_log());
 
 	/* dump idle ratio */
 	if (idle_ratio_en) {
@@ -169,7 +169,7 @@ void mtk_idle_block_reason_report(struct MTK_IDLE_MODEL_CLERK const *clerk)
 			, "[%d] = (%lu), "
 			, i, clerk->status.cnt.enter[i]);
 
-	printk_deferred("[name:spm&]Power/swap %s\n"
+	pr_debug("[name:spm&]Power/swap %s\n"
 		, get_idle_buf(idle_state_log));
 
 	/* block category */
@@ -181,7 +181,7 @@ void mtk_idle_block_reason_report(struct MTK_IDLE_MODEL_CLERK const *clerk)
 					, "[%s] = %lu, "
 					, mtk_idle_block_reason_name(i)
 					, clerk->status.cnt.block[i]);
-	printk_deferred("[name:spm&]Power/swap %s\n"
+	pr_debug("[name:spm&]Power/swap %s\n"
 		, get_idle_buf(idle_state_log));
 
 	/* block mask */
@@ -191,7 +191,7 @@ void mtk_idle_block_reason_report(struct MTK_IDLE_MODEL_CLERK const *clerk)
 	idle_state_log.p_idx += mtk_idle_cond_append_info(true, clerk->type,
 		idle_state_log.p_idx,
 		IDLE_LOG_BUF_LEN - strlen(idle_state_log.buf));
-	printk_deferred("[name:spm&]Power/swap %s\n"
+	pr_debug("[name:spm&]Power/swap %s\n"
 		, get_idle_buf(idle_state_log));
 	spm_resource_req_block_dump();
 }

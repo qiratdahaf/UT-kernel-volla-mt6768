@@ -659,7 +659,7 @@ int do_ptim_internal(bool isSuspend, unsigned int *bat,
 #else
 	*cur = 0;
 #endif
-	pr_info("%s: bat %d cur %d\n", __func__, *bat, *cur);
+	pr_debug("%s: bat %d cur %d\n", __func__, *bat, *cur);
 
 	return ret;
 }
@@ -1112,7 +1112,7 @@ int dlpt_notify_handler(void *unused)
 			exec_dlpt_callback(g_imix_val);
 			pre_ui_soc = cur_ui_soc;
 
-			pr_info("[DLPT_final] %d,%d,%d,%d,%d\n",
+			pr_debug("[DLPT_final] %d,%d,%d,%d,%d\n",
 				g_imix_val, pre_ui_soc, cur_ui_soc,
 				diff_ui_soc, IMAX_MAX_VALUE);
 		}

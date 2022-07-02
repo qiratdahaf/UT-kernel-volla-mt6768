@@ -179,7 +179,7 @@ static void mt6358_irq_sp_handler(struct mt6358_chip *chip,
 				continue;
 			hwirq = sp_top_ints[sp].hwirq_base + 16 * i + j;
 			virq = irq_find_mapping(chip->irq_domain, hwirq);
-			dev_info(chip->dev,
+			dev_dbg(chip->dev,
 				"Reg[0x%x]=0x%x,name=%s,hwirq=%d,type=%d\n",
 				sta_reg, sp_int_status,
 				pmic_irqs[hwirq].name, hwirq,

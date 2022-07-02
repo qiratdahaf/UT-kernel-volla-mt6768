@@ -406,7 +406,7 @@ void battery_update_psd(struct battery_data *bat_data)
     	//pirze add by wangfei for gigast customer 20210902 start
 	#if defined(CONFIG_PRIZE_CHARGE_CURRENT_CTRL_GIGAST)
     	if(gm.is_probe_done == true){
-		printk("battery_update_psd gm.is_probe_done true \n");
+		pr_debug("battery_update_psd gm.is_probe_done true \n");
    	 }else{
 	        printk("battery_update_psd gm.is_probe_done false \n");
 		msleep(50);

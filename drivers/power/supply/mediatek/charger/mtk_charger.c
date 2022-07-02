@@ -1706,7 +1706,7 @@ static void mtk_chg_get_tchg(struct charger_manager *info)
 static void charger_check_step(struct charger_manager *info){
     int temperature;
 	temperature = info->battery_temp;
-	chr_err("charger_check_step before choice current_step =%d temp=%d \n",info->step_info.current_step,temperature);
+	chr_debug("charger_check_step before choice current_step =%d temp=%d \n",info->step_info.current_step,temperature);
 	
     if(temperature >= info->step_info.start_step1_temp && temperature < info->step_info.start_step2_temp){
        info->step_info.current_step = STEP_T1;
@@ -1737,7 +1737,7 @@ static void charger_check_step(struct charger_manager *info){
    {
           chr_err("temp >50 or < 0 temperature =%d  battery_vol =%d\n",temperature,g_cw2015_vol);
    }
-   chr_err("charger_check_status after choice  current_step =%d \n",info->step_info.current_step);
+   chr_debug("charger_check_status after choice  current_step =%d \n",info->step_info.current_step);
 }
 #endif
 /*prize add by wangfei for for gigast customer  20210902 end  */
@@ -1828,7 +1828,7 @@ static void charger_check_status(struct charger_manager *info)
 stop_charging:
 	mtk_battery_notify_check(info);
 
-	chr_err("tmp:%d (jeita:%d sm:%d cv:%d en:%d) (sm:%d) en:%d c:%d s:%d ov:%d sc:%d %d %d\n",
+	chr_debug("tmp:%d (jeita:%d sm:%d cv:%d en:%d) (sm:%d) en:%d c:%d s:%d ov:%d sc:%d %d %d\n",
 		temperature, info->enable_sw_jeita, info->sw_jeita.sm,
 		info->sw_jeita.cv, info->sw_jeita.charging, thermal->sm,
 		charging, info->cmd_discharging, info->safety_timeout,
@@ -1908,7 +1908,7 @@ static enum alarmtimer_restart
 	unsigned long flags;
 
 	if (info->is_suspend == false) {
-		chr_err("%s: not suspend, wake up charger\n", __func__);
+		chr_debug("%s: not suspend, wake up charger\n", __func__);
 		_wake_up_charger(info);
 	} else {
 		chr_err("%s: alarm timer timeout\n", __func__);
@@ -1941,7 +1941,7 @@ static void mtk_charger_start_timer(struct charger_manager *info)
 
 	ktime = ktime_set(info->endtime.tv_sec, info->endtime.tv_nsec);
 
-	chr_err("%s: alarm timer start:%d, %ld %ld\n", __func__, ret,
+	chr_debug("%s: alarm timer start:%d, %ld %ld\n", __func__, ret,
 		info->endtime.tv_sec, info->endtime.tv_nsec);
 	alarm_start(&pinfo->charger_timer, ktime);
 }
@@ -1978,7 +1978,7 @@ static int charger_routine_thread(void *arg)
 		info->charger_thread_timeout = false;
 		bat_current = battery_get_bat_current();
 		chg_current = pmic_get_charging_current();
-		chr_err("Vbat=%d,Ibat=%d,I=%d,VChr=%d,T=%d,Soc=%d:%d,CT:%d:%d hv:%d pd:%d:%d\n",
+		chr_debug("Vbat=%d,Ibat=%d,I=%d,VChr=%d,T=%d,Soc=%d:%d,CT:%d:%d hv:%d pd:%d:%d\n",
 			battery_get_bat_voltage(), bat_current, chg_current,
 			battery_get_vbus(), battery_get_bat_temperature(),
 			battery_get_soc(), battery_get_uisoc(),

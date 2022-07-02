@@ -547,7 +547,7 @@ int mtk_pe20_check_charger(struct charger_manager *pinfo)
 	return ret;
 out:
 
-	chr_info("%s: stop, SOC = (%d, %d, %d), to_check_chr_type = %d, chr_type = %d, ret = %d\n",
+	chr_debug("%s: stop, SOC = (%d, %d, %d), to_check_chr_type = %d, chr_type = %d, ret = %d\n",
 		__func__, battery_get_soc(),
 		pinfo->data.ta_start_battery_soc,
 		pinfo->data.ta_stop_battery_soc, pe20->to_check_chr_type,
@@ -594,7 +594,7 @@ int mtk_pe20_start_algorithm(struct charger_manager *pinfo)
 
 	if (!pe20->is_connect) {
 		ret = -EIO;
-		chr_info("%s: stop, PE+20 is not connected\n",
+		chr_debug("%s: stop, PE+20 is not connected\n",
 			__func__);
 		__pm_relax(&pe20->suspend_lock);
 		mutex_unlock(&pe20->access_lock);

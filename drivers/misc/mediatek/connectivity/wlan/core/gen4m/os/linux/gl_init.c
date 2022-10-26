@@ -1812,8 +1812,6 @@ static int wlanStop(struct net_device *prDev)
 	GLUE_ACQUIRE_SPIN_LOCK(prGlueInfo, SPIN_LOCK_NET_DEV);
 	if (prGlueInfo->prScanRequest) {
 		kalCfg80211ScanDone(prGlueInfo->prScanRequest, TRUE);
-		aisFsmStateAbort_SCAN(prGlueInfo->prAdapter,
-					wlanGetBssIdx(prDev));
 		prGlueInfo->prScanRequest = NULL;
 	}
 	GLUE_RELEASE_SPIN_LOCK(prGlueInfo, SPIN_LOCK_NET_DEV);
